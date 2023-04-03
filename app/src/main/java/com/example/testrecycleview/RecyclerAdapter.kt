@@ -8,11 +8,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(val context: Context, private val items: List<String>, private val cellClickListener: CellClickListener) :
+class RecyclerAdapter(
+    val context: Context,
+    private val items: List<String>,
+    private val cellClickListener: CellClickListener
+) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-
-  //  private var onClickListener: OnClickListener? = null
-  //var onItemClickListener: OnItemClickListener? = null
 
     override fun getItemCount() = items.size
 
@@ -33,24 +34,9 @@ class RecyclerAdapter(val context: Context, private val items: List<String>, pri
         }
     }
 
-
-//    fun setOnClickListener(onClickListener: OnClickListener) {
-//        this.onClickListener = onClickListener
-//    }
-
-
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemText: TextView = view.findViewById(R.id.itemTextView)
         val titleText: TextView = view.findViewById(R.id.titleTextView)
 
-
-//        private fun Context.toast(message: CharSequence) =
-//            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
-
-//    interface OnItemClickListener {
-//        fun onItemClick(position: Int)
-//    }
 }
