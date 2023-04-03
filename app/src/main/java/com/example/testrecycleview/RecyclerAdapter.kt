@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(val context: Context, private val items: List<String>, private val listener: OnItemClickListener) :
+class RecyclerAdapter(val context: Context, private val items: List<String>, private val cellClickListener: CellClickListener) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
   //  private var onClickListener: OnClickListener? = null
@@ -28,7 +28,9 @@ class RecyclerAdapter(val context: Context, private val items: List<String>, pri
             holder.itemText.text = items[position]
             holder.titleText.text = position.toString()
         }
-        holder.bindView(context, items[position], listener)
+        holder.itemView.setOnClickListener {
+            cellClickListener.onCellClickListener(items[position])
+        }
     }
 
 

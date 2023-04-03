@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), CellClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
         val buttonAdd = findViewById<Button>(R.id.addItemButton)
 
 
-        val itemAdapter = RecyclerAdapter(listItem,this)
+        val itemAdapter = RecyclerAdapter(this, listItem,this)
 
         listItem.addAll(listOf("First_Item", "Second_Item"))          /// add some template to recycleView
 
@@ -66,10 +66,14 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
     }
 
 
-    override fun onItemClick(position: Int) {
-        val textView = findViewById<TextView>(R.id.textView)
-        textView.text = "I did it"
-        Toast.makeText(this,"Cell clicked : $position", Toast.LENGTH_SHORT).show()
-        Log.d("tag", "Item clicked: $position")
+//    override fun onItemClick(position: Int) {
+//        val textView = findViewById<TextView>(R.id.textView)
+//        textView.text = "I did it"
+//        Toast.makeText(this,"Cell clicked : $position", Toast.LENGTH_SHORT).show()
+//        Log.d("tag", "Item clicked: $position")
+//    }
+
+    override fun onCellClickListener(data: String) {
+        Toast.makeText(this,"Cell clicked ++++++++ $data", Toast.LENGTH_SHORT).show()
     }
 }

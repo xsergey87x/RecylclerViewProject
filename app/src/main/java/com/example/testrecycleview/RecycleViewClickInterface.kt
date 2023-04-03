@@ -1,6 +1,5 @@
 package com.example.testrecycleview
 
-interface RecycleViewClickInterface {
-
-    fun onCellClickListener(position: Int)
+interface CellClickListener {
+    fun onCellClickListener(data: String)
 }
