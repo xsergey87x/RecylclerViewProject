@@ -12,7 +12,7 @@ class RecyclerAdapter(val context: Context, private val items: List<String>, pri
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
   //  private var onClickListener: OnClickListener? = null
-  var onItemClickListener: OnItemClickListener? = null
+  //var onItemClickListener: OnItemClickListener? = null
 
     override fun getItemCount() = items.size
 
@@ -29,7 +29,7 @@ class RecyclerAdapter(val context: Context, private val items: List<String>, pri
             holder.titleText.text = position.toString()
         }
         holder.itemView.setOnClickListener {
-            cellClickListener.onCellClickListener(items[position])
+            cellClickListener.onCellClickListener(items[position], position)
         }
     }
 
@@ -50,7 +50,7 @@ class RecyclerAdapter(val context: Context, private val items: List<String>, pri
     }
 
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
+//    interface OnItemClickListener {
+//        fun onItemClick(position: Int)
+//    }
 }
