@@ -1,5 +1,6 @@
 package com.example.testrecycleview
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -40,17 +41,6 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = itemAdapter
 
-       /// itemAdapter.setOnClickListener(object : RecyclerAdapter.OnClickListener {
-//
-//            override fun onClick(position: Int, model: String) {
-//                val text = "Result  *********** $position"
-//                val duration = Toast.LENGTH_LONG
-//
-//                print("RESULT *********************************  $position")
-//                val toast = Toast.makeText(applicationContext, text, duration)
-//
-//            }
-//        })
 
         val drawable = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
             intArrayOf(Color.BLACK, Color.YELLOW)
@@ -61,19 +51,22 @@ class MainActivity : AppCompatActivity(), CellClickListener {
             setDrawable(drawable);
             recyclerView.addItemDecoration(this)
         }
-
-
     }
-
-
-//    override fun onItemClick(position: Int) {
-//        val textView = findViewById<TextView>(R.id.textView)
-//        textView.text = "I did it"
-//        Toast.makeText(this,"Cell clicked : $position", Toast.LENGTH_SHORT).show()
-//        Log.d("tag", "Item clicked: $position")
-//    }
 
     override fun onCellClickListener(data: String) {
         Toast.makeText(this,"Cell clicked ++++++++ $data", Toast.LENGTH_SHORT).show()
+        createDialog()
+    }
+
+    fun createDialog()
+    {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Delete Item")
+        builder.setMessage("Do you want to delete item?")
+
+        builder.setNeutralButton("Info") {
+            dialogInterface, i ->
+        }
+        builder.show()
     }
 }
