@@ -1,4 +1,5 @@
 package com.example.testrecycleview
+
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -11,9 +12,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity(), CellClickListener {
+class MainActivity : AppCompatActivity(), ItemClickListener {
 
     private val listItem = arrayListOf<String>()
+    private lateinit var itemAdapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         val textInputItemView = findViewById<TextView>(R.id.itemNameInput)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val buttonAdd = findViewById<Button>(R.id.addItemButton)
-        val itemAdapter = RecyclerAdapter(this, listItem, this)
+        itemAdapter = RecyclerAdapter(listItem, this)
 
         /// add some example to recycleView
         listItem.addAll(
@@ -56,7 +58,8 @@ class MainActivity : AppCompatActivity(), CellClickListener {
             recyclerView.addItemDecoration(this)
         }
     }
-    override fun onCellClickListener(data: String, position: Int) {
+
+    override fun onItemClickListener(data: String, position: Int) {
         createDialog(data, position)
     }
 
@@ -64,9 +67,11 @@ class MainActivity : AppCompatActivity(), CellClickListener {
         val dialogBinding = layoutInflater.inflate(R.layout.custom_dialog, null)
         val customDialog = Dialog(this)
 
-        customDialog.setContentView(dialogBinding)
-        customDialog.setCancelable(true)
-        customDialog.show()
+        customDialog.apply {
+            setContentView(dialogBinding)
+            setCancelable(true)
+            show()
+        }
 
         val textItem = dialogBinding.findViewById<TextView>(R.id.textViewItem)
         val okButton = dialogBinding.findViewById<Button>(R.id.buttonOk)
@@ -84,9 +89,7 @@ class MainActivity : AppCompatActivity(), CellClickListener {
     }
 
     private fun deleteItem(position: Int) {
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         listItem.removeAt(position)
-        val itemAdapter = RecyclerAdapter(this, listItem, this)
-        recyclerView.adapter = itemAdapter
+        itemAdapter.notifyDataSetChanged();
     }
 }
